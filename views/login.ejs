@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>Cadastro</title>
+
+</head>
+
+<body style="background: lightblue;">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Registro</div>
+                    <div class="card-body">
+
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <label for="nome">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sobrenome">Sobrenome:</label>
+                                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endereco">Endereço:</label>
+                                <input type="text" class="form-control" id="endereco" name="endereco" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cpf">CPF:</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senha">Senha:</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="senhaConfirm">Confirme a senha:</label>
+                                <input type="password" class="form-control" id="senhaConfirm" name="senhaConfirm" required>
+                            </div>
+
+                            <div id="senhaErro" class="alert alert-danger" style="display: none;">
+                                As senhas não conferem!
+                            </div>
+                            <div id="senhaCorreta" class="alert alert-success" style="display: none;">
+                                As senhas conferem!
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <a href="/home"><button type="button" class="btn btn-primary">Cancelar</button></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('senhaConfirm').addEventListener('input', function() {
+            var senha = document.getElementById('senha').value;
+            var senhaConfirm = document.getElementById('senhaConfirm').value;
+            var senhaErro = document.getElementById('senhaErro');
+            var senhaCorreta = document.getElementById('senhaCorreta');
+
+            if (senha !== senhaConfirm) {
+                senhaErro.style.display = 'block';
+                senhaCorreta.style.display = 'none';
+            } else if (senha === senhaConfirm && senha !== "") {
+                senhaErro.style.display = 'none';
+                senhaCorreta.style.display = 'block';
+            } else {
+                senhaErro.style.display = 'none';
+                senhaCorreta.style.display = 'none';
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var senha = document.getElementById('senha').value;
+            var senhaConfirm = document.getElementById('senhaConfirm').value;
+
+            if (senha !== senhaConfirm) {
+                event.preventDefault();
+                document.getElementById('senhaErro').style.display = 'block';
+                document.getElementById('senhaCorreta').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
